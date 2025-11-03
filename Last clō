@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="ar">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Winter collection — Fakhr (Replica)</title>
+
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- main stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- simple favicon placeholder -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23333'/%3E%3Ctext x='50' y='55' font-size='50' fill='white' text-anchor='middle' font-family='Inter, sans-serif'%3EF%3C/text%3E%3C/svg%3E">
+</head>
+<body dir="rtl" class="page-collection">
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a href="#" class="logo">Fakhr</a>
+      </div>
+
+      <nav class="main-nav">
+        <a href="#">HOME</a>
+        <div class="dropdown">
+          <button class="dropbtn">Winter ▾</button>
+          <div class="dropcontent">
+            <a href="#">Hoodies</a>
+            <a href="#">Sweatpants</a>
+            <a href="#">Jackets</a>
+          </div>
+        </div>
+        <a href="#">Accessories</a>
+      </nav>
+
+      <div class="header-right">
+        <button id="search-toggle" class="icon-btn">بحث</button>
+        <div class="cart">
+          <button class="icon-btn">Cart</button>
+          <span id="cart-count" class="cart-count">0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="collection-hero">
+      <div class="container">
+        <h1>Collection: Winter collection</h1>
+        <p class="subtitle">Hoodies</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    <aside class="sidebar">
+      <section class="filter">
+        <h3>Filter</h3>
+
+        <label>
+          <input type="checkbox" id="in-stock" checked>
+          In stock
+        </label>
+
+        <label>
+          السعر حتى:
+          <input type="range" id="price-range" min="100" max="1000" step="10" value="1000">
+          <div class="price-value">LE <span id="price-value">1000</span></div>
+        </label>
+
+        <h4>Sort</h4>
+        <select id="sort-by">
+          <option value="featured">Featured</option>
+          <option value="price-asc">Price, low to high</option>
+          <option value="price-desc">Price, high to low</option>
+          <option value="newest">Date, new to old</option>
+        </select>
+      </section>
+
+      <section class="newsletter">
+        <h4>Join Fakhr Family</h4>
+        <input id="email" type="email" placeholder="Email" />
+        <button id="subscribe">Subscribe</button>
+      </section>
+    </aside>
+
+    <section class="products-area">
+      <div class="toolbar">
+        <div id="results-count">6 products</div>
+        <div class="view-mode">
+          <button id="grid-btn" class="active">Grid</button>
+          <button id="list-btn">List</button>
+        </div>
+      </div>
+
+      <div id="products-grid" class="products-grid">
+        <!-- products rendered by JS -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="links">
+        <a href="#">About Us</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Us</a>
+      </div>
+      <div class="copyright">© 2025 Fakhr — Replica</div>
+    </div>
+  </footer>
+
+  <!-- product detail modal -->
+  <div id="product-modal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button id="modal-close" class="modal-close">×</button>
+      <img id="modal-img" src="" alt="">
+      <div class="modal-info">
+        <h2 id="modal-title"></h2>
+        <p id="modal-price"></p>
+        <p id="modal-desc"></p>
+        <button id="add-to-cart">Add to cart</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+:root{
+  --bg:#ffffff;
+  --muted:#777;
+  --accent:#0b0b0b; /* dark navy / kohl-like */
+  --container:1200px;
+  --card-shadow: 0 6px 18px rgba(9,10,10,0.06);
+  --gap:16px;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  color-scheme: light;
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--accent);line-height:1.45}
+
+.container{max-width:var(--container);margin:0 auto;padding:0 18px}
+
+.site-header{border-bottom:1px solid #eee;background:#fff}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+.brand .logo{font-weight:700;font-size:20px;text-decoration:none;color:var(--accent)}
+.main-nav a, .main-nav .dropbtn{margin-left:12px;color:var(--muted);text-decoration:none;font-size:14px}
+.main-nav{display:flex;align-items:center;gap:8px}
+.dropdown{position:relative}
+.dropcontent{position:absolute;right:0;top:34px;background:#fff;border:1px solid #eee;padding:8px;display:none;min-width:140px;box-shadow:var(--card-shadow)}
+.dropdown:hover .dropcontent{display:block}
+
+.header-right{display:flex;align-items:center;gap:10px}
+.icon-btn{background:transparent;border:1px solid #eee;padding:6px 10px;border-radius:6px;cursor:pointer}
+
+.collection-hero{padding:26px 0 14px;border-bottom:1px solid #f2f2f2}
+.collection-hero h1{margin:0;font-size:24px}
+.collection-hero .subtitle{color:var(--muted);margin-top:6px}
+
+.main-content{display:flex;gap:24px;padding:24px 0}
+.sidebar{width:280px}
+.products-area{flex:1}
+
+.filter{background:#fff;padding:16px;border-radius:8px;border:1px solid #f0f0f0}
+.filter h3{margin:0 0 12px}
+.filter label{display:block;margin:8px 0;color:var(--muted);font-size:14px}
+.price-value{margin-top:8px;color:var(--accent);font-weight:600}
+
+.toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
+
+.card{background:#fff;border-radius:10px;padding:12px;border:1px solid #f3f3f3;box-shadow:var(--card-shadow);display:flex;flex-direction:column;gap:10px}
+.card img{width:100%;height:220px;object-fit:cover;border-radius:8px}
+.card h3{margin:0;font-size:16px}
+.card .price{color:var(--accent);font-weight:600}
+
+.card .meta{display:flex;justify-content:space-between;align-items:center}
+
+footer.site-footer{border-top:1px solid #eee;padding:28px 0;margin-top:40px;background:#fff}
+footer .links{display:flex;gap:12px;flex-wrap:wrap}
+
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;padding:20px;z-index:60}
+.modal[aria-hidden="false"]{display:flex}
+.modal-content{background:#fff;border-radius:10px;max-width:900px;width:100%;display:flex;gap:20px;padding:18px;align-items:flex-start}
+.modal-content img{width:320px;height:320px;object-fit:cover;border-radius:8px}
+.modal-info{flex:1}
+.modal-close{background:#eee;border:0;padding:6px 10px;border-radius:6px;cursor:pointer}
+
+.cart-count{background:#f44336;color:#fff;padding:2px 8px;border-radius:12px;margin-right:6px;font-size:12px}
+
+@media (max-width:900px){
+  .main-content{flex-direction:column}
+  .sidebar{width:100%}
+  .modal-content{flex-direction:column;align-items:center}
+  .modal-content img{width:80%;height:auto}
+}
+// Basic data for 6 products (replace image filenames in /images/)
+const products = [
+  { id: 1, title: "Timeless IV jacket", price: 950, inStock: true, img: "images/product-1.jpg", colors: ["#222"], desc: "Premium winter jacket." },
+  { id: 2, title: "Timeless II hoodie", price: 880, inStock: true, img: "images/product-2.jpg", colors: ["#333"], desc: "Classic hoodie, soft cotton." },
+  { id: 3, title: "GO LEFT hoodie", price: 880, inStock: true, img: "images/product-3.jpg", colors: ["#222"], desc: "Statement hoodie." },
+  { id: 4, title: "Self love crewneck", price: 750, inStock: true, img: "images/product-4.jpg", colors: ["#666"], desc: "Comfort crewneck." },
+  { id: 5, title: "FEEL FREE hoodie (3 colors)", price: 860, inStock: true, img: "images/product-5.jpg", colors: ["#111"], desc: "Available in 3 colors." },
+  { id: 6, title: "FEEL FREE pants (3 colors)", price: 760, inStock: false, img: "images/product-6.jpg", colors: ["#111"], desc: "Matching pants." }
+];
+
+const grid = document.getElementById('products-grid');
+const priceRange = document.getElementById('price-range');
+const priceValue = document.getElementById('price-value');
+const inStockCheckbox = document.getElementById('in-stock');
+const resultsCount = document.getElementById('results-count');
+const sortBy = document.getElementById('sort-by');
+
+let cartCount = 0;
+const cartCounter = document.getElementById('cart-count');
+
+function renderProducts(list){
+  grid.innerHTML = '';
+  list.forEach(p => {
+    const card = document.createElement('article');
+    card.className = 'card';
+    const img = document.createElement('img');
+    img.src = p.img;
+    img.alt = p.title;
+    img.onerror = function(){ this.src = 'data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"600\" height=\"400\"%3E%3Crect width=\"100%\" height=\"100%\" fill=\"%23eee\"/%3E%3Ctext x=\"50%\" y=\"50%\" dominant-baseline=\"middle\" text-anchor=\"middle\" fill=\"%23999\" font-size=\"20\" font-family=\"Inter, Arial\"%3EImage%20placeholder%3C/text%3E%3C/svg%3E' }
+    const title = document.createElement('h3');
+    title.textContent = p.title;
+    const price = document.createElement('div');
+    price.className = 'price';
+    price.textContent = `LE ${p.price.toFixed(0)} EGP`;
+
+    const meta = document.createElement('div');
+    meta.className = 'meta';
+    const detailsBtn = document.createElement('button');
+    detailsBtn.textContent = 'عرض';
+    detailsBtn.onclick = () => openModal(p);
+    detailsBtn.className = 'icon-btn';
+    meta.appendChild(price);
+    meta.appendChild(detailsBtn);
+
+    card.appendChild(img);
+    card.appendChild(title);
+    card.appendChild(meta);
+
+    grid.appendChild(card);
+  });
+
+  resultsCount.textContent = `${list.length} products`;
+}
+
+function filterAndSort(){
+  const maxPrice = Number(priceRange.value);
+  const onlyInStock = inStockCheckbox.checked;
+  let list = products.filter(p => p.price <= maxPrice);
+  if(onlyInStock) list = list.filter(p => p.inStock);
+  const sortVal = sortBy.value;
+  if(sortVal === 'price-asc') list.sort((a,b)=>a.price-b.price);
+  if(sortVal === 'price-desc') list.sort((a,b)=>b.price-a.price);
+  if(sortVal === 'newest') list = list.slice().reverse(); // dummy
+  renderProducts(list);
+}
+
+priceRange.addEventListener('input', e => {
+  priceValue.textContent = e.target.value;
+  filterAndSort();
+});
+inStockCheckbox.addEventListener('change', filterAndSort);
+sortBy.addEventListener('change', filterAndSort);
+
+// Modal logic
+const modal = document.getElementById('product-modal');
+const modalImg = document.getElementById('modal-img');
+const modalTitle = document.getElementById('modal-title');
+const modalPrice = document.getElementById('modal-price');
+const modalDesc = document.getElementById('modal-desc');
+const modalClose = document.getElementById('modal-close');
+const addToCartBtn = document.getElementById('add-to-cart');
+
+function openModal(product){
+  modalImg.src = product.img;
+  modalTitle.textContent = product.title;
+  modalPrice.textContent = `LE ${product.price} EGP`;
+  modalDesc.textContent = product.desc;
+  addToCartBtn.onclick = () => {
+    cartCount++;
+    cartCounter.textContent = cartCount;
+    alert(`${product.title} added to cart`);
+  };
+  modal.setAttribute('aria-hidden','false');
+}
+modalClose.addEventListener('click', ()=> modal.setAttribute('aria-hidden','true'));
+modal.addEventListener('click', (e)=> { if(e.target === modal) modal.setAttribute('aria-hidden','true') });
+
+// initial render
+priceValue.textContent = priceRange.value;
+renderProducts(products);
+
+// small UX: subscribe button
+document.getElementById('subscribe').addEventListener('click', ()=>{
+  const email = document.getElementById('email').value.trim();
+  if(!email) { alert('ادخلي الايميل'); return; }
+  alert('تم الاشتراك — شكراً!');
+});
